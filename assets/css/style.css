@@ -43,7 +43,7 @@ body {
 #character-select {
     position: static;
     width: 600px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 130px;
 }
 
@@ -56,42 +56,45 @@ body {
 .character-card {
     float: left;
     position: relative;
-    width: 23%; 
-    height: 98%;
-    border: 1px solid green;
+    width: 20%; 
+    height: 94%;
+    border: 2px solid green;
     margin-right: 2%;
     font-size: 1em;
     text-align: center;
+    background: white;
 
 }
 
 .character-card:first-child {
 
-    background: blue;
+    /* background: blue; */
 
 }
 
 #character-2 {
 
-    background: red;
+    /* background: red; */
 
 }
 
 #character-3 {
 
-    background: orange;
+    /* background: orange; */
 
 }
 
 .character-card:last-child {
     
-    background: yellow;
+    /* background: yellow; */
     margin-right: 0;
 
 }
 
 .name {
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    font-weight: bold;
+    font-size: 12px;
 }
 
 .character-picture {
@@ -110,11 +113,37 @@ body {
     top: 95%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+.section{
+    position: static;
+    width: 600px;
+    /* border: 1px solid black; */
+    /* max-height: 100px; */
+    /* min-height: 100%; */
+    height: 130px;
+
+}
+
+.chosen-enemy {
+    border: 1px solid black;
+    margin: 0;
+    background:red;
+
+}
+
+.chosen-defender {
+
+    background: black;
+    color: white;
+    border: 2px solid green;
+
 }
 
 .secondary-title {
 
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.5em;
 
 }
