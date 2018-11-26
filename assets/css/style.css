@@ -1,0 +1,120 @@
+html {
+
+    height: 100vh;
+    width: 100vw;
+
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;  
+    /* background-image: url("../images/purty_wood_@2X.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh; */
+}
+
+#title-wrapper {
+
+    position:relative;
+    display: inline-block;
+    width: 100%;
+    height: 5vh;
+    margin: 1%;
+
+}
+
+#title {
+    position: absolute;
+    font-weight: bold;
+    font-size: 2em;
+    top: 0;
+    right: 10%;
+
+}
+
+#game-wrapper {
+    position: relative;
+    width: 80%;
+    min-height: 100%;
+    margin-left:1%;
+
+}
+
+#character-select {
+    position: static;
+    width: 600px;
+    border: 1px solid black;
+    height: 130px;
+}
+
+.section {
+
+    position: static;
+
+}
+
+.character-card {
+    float: left;
+    position: relative;
+    width: 23%; 
+    height: 98%;
+    border: 1px solid green;
+    margin-right: 2%;
+    font-size: 1em;
+    text-align: center;
+
+}
+
+.character-card:first-child {
+
+    background: blue;
+
+}
+
+#character-2 {
+
+    background: red;
+
+}
+
+#character-3 {
+
+    background: orange;
+
+}
+
+.character-card:last-child {
+    
+    background: yellow;
+    margin-right: 0;
+
+}
+
+.name {
+    border: 1px solid black;
+}
+
+.character-picture {
+    position: absolute;
+    width: 90%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    
+}
+
+.health {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.secondary-title {
+
+    font-weight: bold;
+    font-size: 1em;
+
+}
