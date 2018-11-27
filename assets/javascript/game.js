@@ -2,8 +2,6 @@ $("#enemies").hide();
 $("#fight-section").hide();
 $("#defender").hide();
 
-var counter = 0;
-
 var obiWan = {
     healthPoints: 130,
     Attack: 6,
@@ -37,6 +35,7 @@ var yourCharacterIsChosen = false;
 var enemiesSelected = false;
 var noDefender = false;
 var defenderIsClicked = false;
+var defenderIsClickedAgain = false;
 
     $("document").ready(function() {
 
@@ -98,16 +97,16 @@ var defenderIsClicked = false;
             $(".chosen-enemy").on("click", function() {
                 buttonID= $(this).attr("id");
                 console.log(buttonID);
-                counter++;               
+                defenderIsClicked = true;              
                 $("#defender").show();
 
-                if (counter = 1) {
+                if (defenderIsClicked) {
                     $(this).addClass("chosen-defender");
                     $(this).appendTo("#defender");
-                    defenderIsClicked = true;
+                    defenderIsClickedAgain = true;
                 }
 
-                if (defenderIsClicked) {
+                if (defenderIsClickedAgain) {
                     $("#defender").children().removeClass("chosen-defender").appendTo("#enemies");
                     $(this).addClass("chosen-defender");
                     $(this).appendTo("#defender");
