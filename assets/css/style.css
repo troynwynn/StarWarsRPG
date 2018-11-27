@@ -147,3 +147,9 @@ body {
     font-size: 1.5em;
 
 }
+
+#defender-wrapper{
+
+    min-height: 100%;
+
+}
