@@ -1,6 +1,7 @@
 $("#enemies").hide();
 $("#fight-section").hide();
 $("#defender").hide();
+$("#restart").hide();
 
 var obiWan = {
     "healthPoints": 130,
@@ -44,13 +45,15 @@ var defenderIsClickedAgain = false;
 var defenderDefeated = false;
 var characterDefeated = false;
 var finalBattle = false;
+var batteHasStarted = false;
+
 
 
     $("document").ready(function() {
 
 
         $(".choice").on("click", function() {
-            buttonID= $(this).attr("id");
+            var buttonID= $(this).attr("id");
             $("#character-select").hide();
             $("#enemies").show();
             yourCharacterIsChosen = true;
@@ -106,14 +109,16 @@ var finalBattle = false;
 
             }
 
+            
+    
+           
             selectedCharacterHealth = selectedCharacter.data("healthPoints");
             selectedCharacterAttackPower = selectedCharacter.data("Attack");
-            // console.log(selectedCharacterHealth);
-            // console.log(selectedCharacterAttackPower);
-
+           
+            
 
             $(".chosen-enemy").on("click", function() {
-                buttonID= $(this).attr("id");
+                buttonID = $(this).attr("id");
                 defenderIsClicked = true;              
                 $("#defender").show();
 
@@ -133,62 +138,99 @@ var finalBattle = false;
                     selectedDefender = $(this);
                 }
 
-                selectedDefenderAttackPower = selectedDefender.data("Attack");
-                selectedDefenderHealth = selectedDefender.data("healthPoints");
-                currentDefenderHealth = parseInt(selectedDefenderHealth);
-                currentCharacterHealth = parseInt(selectedCharacterHealth);
-                currentCharacterAttackPower = selectedCharacterAttackPower;
-                currentCharacterDefenderPower = selectedDefenderAttackPower;
-                selectedCharacterCounterAttackPower = 0;
+                var selectedDefenderAttackPower = selectedDefender.data("Attack");
+                var selectedDefenderHealth = selectedDefender.data("healthPoints");
+                var currentDefenderHealth = parseInt(selectedDefenderHealth);
+                var currentCharacterHealth = parseInt(selectedCharacterHealth);
+                // var currentCharacterAttackPower = selectedCharacterAttackPower;
+                var currentCharacterDefenderPower = selectedDefenderAttackPower;
+                var selectedCharacterCounterAttackPower = 0;
 
-                
                 $("#attack").on("click", function() {
-                selectedCharacterHealthId = ("#" + selectedCharacter.attr("id") + "-health").toString();
-                selectedCharacterNameId = ("#" + selectedCharacter.attr("id") + "-name");
-
-                selectedDefenderHealthId = ("#" + selectedDefender.attr("id") + "-health").toString();
-                selectedDefenderNameId = ("#" + selectedDefender.attr("id") + "-name");
-                // console.log(selectedCharacterHealthId);
-                // console.log(selectedDefenderHealthId);
-
-                selectedCharacterCounterAttackPower = selectedCharacterCounterAttackPower + selectedCharacter.data("Attack");
-
-                if ((currentCharacterHealth >= 0) && (currentDefenderHealth  >= 0)) {
-                    currentCharacterHealth = currentCharacterHealth - selectedDefenderAttackPower;
-        
-                    currentDefenderHealth = currentDefenderHealth - selectedCharacterCounterAttackPower;
-
-                    if (currentCharacterHealth <= 0) {
-                        alert("You've Lost" + $(selectedCharacterNameId).text() + "Try Again....");
-                        characterDefeated = true;
-
-                    }
-
-                    else if (currentDefenderHealth <= 0) {
-                        alert("You've defeated" + $(selectedDefenderNameId).text() +"!");
-                        defenderDefeated = true;
-
-                    }
-                }
+                    // batteHasStarted = true;
+                    selectedCharacterHealthId = ("#" + selectedCharacter.attr("id") + "-health").toString();
+                    selectedCharacterNameId = ("#" + selectedCharacter.attr("id") + "-name");
     
-                $(selectedCharacterHealthId).text(currentCharacterHealth);
-                $(selectedDefenderHealthId).text(currentDefenderHealth);
+                    selectedDefenderHealthId = ("#" + selectedDefender.attr("id") + "-health").toString();
+                    selectedDefenderNameId = ("#" + selectedDefender.attr("id") + "-name");
+                    // console.log(selectedCharacterHealthId);
+                    // console.log(selectedDefenderHealthId);
     
+                    selectedCharacterCounterAttackPower = selectedCharacterCounterAttackPower + selectedCharacter.data("Attack");
+    
+                    if ((currentCharacterHealth >= 0) && (currentDefenderHealth  >= 0)) {
+                        currentCharacterHealth = currentCharacterHealth - selectedDefenderAttackPower;
             
+                        currentDefenderHealth = currentDefenderHealth - selectedCharacterCounterAttackPower;
+    
+                        if (currentCharacterHealth <= 0) {
+                            // alert("You've Lost" + $(selectedCharacterNameId).text() + "Try Again....");
+
+                            characterDefeated = true;
+                            $("#result").text("You've been defeated" + $(selectedCharacterNameId).text() +"..... GAME OVER !!!")
+                            $("#restart").show();
+                            // battleHasStarted = false;
+    
+                        }
+    
+                        else if (currentDefenderHealth <= 0) {
+                            // alert("You've defeated" + $(selectedDefenderNameId).text() +"!");
+                            defenderDefeated = true;
+                            // battleHasStarted = false;
+                            
+                        }
+                    }
+                     
+                    if (defenderDefeated) {
+                    selectedCharacterHealth = selectedCharacter.data("healthPoints", currentCharacterHealth);
+                    $(selectedCharacterHealthId).text(currentCharacterHealth);
+                    }
+    
+                    else {
+                        $(selectedCharacterHealthId).text(currentCharacterHealth); 
+                    }
+                    
+    
+                    console.log(currentCharacterDefenderPower);
+                   
+                    $(selectedDefenderHealthId).text(currentDefenderHealth);
+        
+                    
+                    
+                    
+        
+                
                 });
+                
+                
 
             });
-    
-           
+
             
-           
             
 
+
+            
 
         });
 
+       
+
+
+        $("#restart").on("click", function() {
+
+
+            location.reload();
+
+
+        });
+        
+        // console.log(selectedCharacterHealth);
+        // console.log(selectedCharacterAttackPower);
+
 
         
+            
 
 
         
