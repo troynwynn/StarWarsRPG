@@ -9,7 +9,7 @@ var obiWan = {
 }
 $("#character-1-health").text(obiWan.healthPoints);
 $("#character-1").data(obiWan);
-console.log($("#character-1"));
+// console.log($("#character-1"));
 
 var luke = {
     "healthPoints": 100,
@@ -17,7 +17,7 @@ var luke = {
     "counterAttackPower": 20
 }
 $("#character-2-health").text(luke.healthPoints);
-$("#character-2").data(obiWan);
+$("#character-2").data(luke);
 
 
 
@@ -43,6 +43,7 @@ var noDefender = false;
 var defenderIsClicked = false;
 var defenderIsClickedAgain = false;
 
+
     $("document").ready(function() {
 
 
@@ -54,10 +55,12 @@ var defenderIsClickedAgain = false;
 
             
             if ((buttonID == "character-1") && ($(this).hasClass("choice"))) {
-                selectedCharacter= $("#character-1").clone();
+                selectedCharacter = $("#character-1").clone();
                 selectedCharacter.addClass("character-card");
                 selectedCharacter.data(obiWan);
                 selectedCharacter.appendTo("#your-character");
+                selectedCharacterHealth = selectedCharacter.data("healthPoints");
+                selectedCharacterAttackPower = selectedCharacter.data("Attack");
                 $(this).detach();
                 $("#character-2").appendTo("#enemies");
                 $("#character-3").appendTo("#enemies");
@@ -70,6 +73,8 @@ var defenderIsClickedAgain = false;
                 selectedCharacter.addClass("character-card");
                 selectedCharacter.data(luke);
                 selectedCharacter.appendTo("#your-character");
+                selectedCharacterHealth = selectedCharacter.data("healthPoints");
+                selectedCharacterAttackPower = selectedCharacter.data("Attack");
                 $(this).detach();
                 $("#character-1").appendTo("#enemies");
                 $("#character-3").appendTo("#enemies");
@@ -82,6 +87,8 @@ var defenderIsClickedAgain = false;
                 selectedCharacter.addClass("character-card");
                 selectedCharacter.data(darthSidious);
                 selectedCharacter.appendTo("#your-character");
+                selectedCharacterHealth = selectedCharacter.data("healthPoints");
+                selectedCharacterAttackPower = selectedCharacter.data("Attack");
                 $(this).detach();
                 $("#character-1").appendTo("#enemies");
                 $("#character-2").appendTo("#enemies");
@@ -95,6 +102,8 @@ var defenderIsClickedAgain = false;
                 selectedCharacter.addClass("character-card");
                 selectedCharacter.data(darthMaul);
                 selectedCharacter.appendTo("#your-character");
+                selectedCharacterHealth = selectedCharacter.data("healthPoints");
+                selectedCharacterAttackPower = selectedCharacter.data("Attack");
                 $(this).detach();
                 $("#character-1").appendTo("#enemies");
                 $("#character-2").appendTo("#enemies");
@@ -102,6 +111,12 @@ var defenderIsClickedAgain = false;
                 $("#character-1, #character-2, #character-3").removeClass("choice").addClass("chosen-enemy");
 
             }
+
+            // selectedCharacterHealth = selectedCharacter.data("healthPoints");
+            // selectedCharacterAttackPower = selectedCharacter.data("Attack");
+            console.log(selectedCharacterHealth);
+            console.log(selectedCharacterAttackPower);
+
 
             $(".chosen-enemy").on("click", function() {
                 buttonID= $(this).attr("id");
@@ -113,6 +128,7 @@ var defenderIsClickedAgain = false;
                     $(this).appendTo("#defender");
                     defenderIsClickedAgain = true;
                     selectedDefender = $(this);
+                    // console.log(selectedDefender);
                 
                 }
 
@@ -123,14 +139,57 @@ var defenderIsClickedAgain = false;
                     selectedDefender = $(this);
                 }
 
+                selectedDefenderAttackPower = selectedDefender.data("Attack");
+                selectedDefenderHealth = selectedDefender.data("healthPoints");
             });
     
+           
+            
+            
+            
+
 
         });
 
+
         $("#attack").on("click", function() {
-            selectedCharacterHealthCounter = selectedCharacter.data("healthPoints");
-            selectedDefenderAttackPower = selectedDefender.data("Attack");
+            selectedCharacterHealthId = ("#" + selectedCharacter.attr("id") + "-health").toString();
+            selectedDefenderHealthId = ("#" + selectedDefender.attr("id") + "-health").toString();
+            console.log(selectedCharacterHealthId);
+            console.log(selectedDefenderHealthId);
+
+
+            currentDefenderHealth = selectedDefenderHealth;
+            currentCharacterHealth = selectedCharacterHealth;
+           
+            
+            // console.log(selectedCharacterHealth);
+            // console.log(selectedCharacterAttackPower);
+            // console.log(selectedDefenderAttackPower);
+            // console.log(selectedDefenderHealth);
+
+             if ((selectedCharacterHealth > 0) || (selectedDefenderHealth  > 0)) {
+
+                currentCharacterHealth = currentCharacterHealth - selectedDefenderAttackPower;
+
+                currentDefenderHealth = currentDefenderHealth - selectedCharacterAttackPower;
+
+                selectedCharacterAttackPower = selectedCharacterAttackPower + selectedCharacter.data("Attack");
+
+                $(selectedCharacterHealthId).text(currentCharacterHealth);
+                $(selectedDefenderHealthId).text(currentDefenderHealth);
+
+                
+                
+                // selectedCharacter.health.text(selectedCharacterCurrentHealth);
+
+
+                
+                // console.log(currentCharacterHealth.text(currentCharacterHealth));
+
+
+            }
+
             
             // console.log(selectedDefender.data("Attack"));
             // console.log(selectedCharacter.data("Attack"));
@@ -139,13 +198,12 @@ var defenderIsClickedAgain = false;
             // console.log(selectedDefender);
             // selectedCharacterHealthCounter = obiWan.healthPoints;
             // selectedDefenderAttackPower = selectedDefender.data("attack");
-            console.log(selectedCharacterHealthCounter);
-            console.log(selectedDefenderAttackPower);
+            // console.log(selectedCharacterHealthCounter);
+            // console.log(selectedDefenderAttackPower);
         
         
         });
 
-``
 
         
 
