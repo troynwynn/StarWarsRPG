@@ -37,6 +37,7 @@ var darthMaul = {
 $("#character-4-health").text(darthMaul.healthPoints);
 $("#character-4").data(darthMaul);
 
+
 var yourCharacterIsChosen = false;
 var enemiesSelected = false;
 var noDefender = false;
@@ -44,6 +45,7 @@ var defenderIsClicked = false;
 var defenderIsClickedAgain = false;
 var defenderDefeated = false;
 var characterDefeated = false;
+var defendersLeft = 3;
 var finalBattle = false;
 var batteHasStarted = false;
 
@@ -176,7 +178,11 @@ var batteHasStarted = false;
                         else if (currentDefenderHealth <= 0) {
                             // alert("You've defeated" + $(selectedDefenderNameId).text() +"!");
                             defenderDefeated = true;
+                            selectedDefender.detach();
+                            
                             // battleHasStarted = false;
+                            defendersLeft--;
+
                             
                         }
                     }
@@ -189,7 +195,14 @@ var batteHasStarted = false;
                     else {
                         $(selectedCharacterHealthId).text(currentCharacterHealth); 
                     }
-                    
+
+
+                    if (defendersLeft === 0) {
+
+                        $("#result").text("Great Job" + $(selectedCharacterNameId).text() +"..... YOU'VE SAVED US !!!");
+                        $("#restart").show();
+
+                    }
     
                     console.log(currentCharacterDefenderPower);
                    
