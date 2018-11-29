@@ -7,10 +7,10 @@ html {
 
 body {
     font-family: 'Courier New', Courier, monospace;  
-    /* background-image: url("../images/purty_wood_@2X.png");
+    background-image: url("../images/star-wars-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh; */
+    /* height: 100vh; */
 }
 
 #title-wrapper {
@@ -25,6 +25,7 @@ body {
 
 #title {
     position: absolute;
+    color: white;
     font-weight: bold;
     font-size: 2em;
     top: 0;
@@ -66,27 +67,7 @@ body {
 
 }
 
-.character-card:first-child {
-
-    /* background: blue; */
-
-}
-
-#character-2 {
-
-    /* background: red; */
-
-}
-
-#character-3 {
-
-    /* background: orange; */
-
-}
-
 .character-card:last-child {
-    
-    /* background: yellow; */
     margin-right: 0;
 
 }
@@ -126,6 +107,10 @@ body {
 
 }
 
+.secondary-title span {
+    font-size: 1.5em;
+}
+
 .chosen-enemy {
     border: 1px solid black;
     margin: 0;
@@ -142,7 +127,7 @@ body {
 }
 
 .secondary-title {
-
+    color: white;
     font-weight: bold;
     font-size: 1.5em;
 
@@ -151,5 +136,10 @@ body {
 #defender-wrapper{
 
     min-height: 100%;
+
+}
+
+#result {
+    color: white;
 
 }

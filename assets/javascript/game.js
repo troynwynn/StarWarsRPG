@@ -41,19 +41,23 @@ $("#character-4").data(darthMaul);
 var yourCharacterIsChosen = false;
 var enemiesSelected = false;
 var noDefender = false;
-var defenderIsClicked = false;
-var defenderIsClickedAgain = false;
+// var defenderIsClicked = false;
+// var defenderIsClickedAgain = false;
 var defenderDefeated = false;
 var characterDefeated = false;
-var defendersLeft = 3;
+var enemiesLeft;
+var defendersLeft;
+var bothAreTrue;
 var finalBattle = false;
 var batteHasStarted = false;
 
 
+$("#enemies").on('DOMSubtreeModified', function () {
+    defendersLeft = (this).childElementCount;
+});
 
 $("document").ready(function() {
-
-
+    
     $(".choice").on("click", function() {
         var buttonID= $(this).attr("id");
         $("#character-select").hide();
@@ -112,16 +116,12 @@ $("document").ready(function() {
         }
 
         
-
-        
         selectedCharacterHealth = selectedCharacter.data("healthPoints");
         selectedCharacterAttackPower = selectedCharacter.data("Attack");
         
-        
-
-        $(".chosen-enemy").on("click", function() {
+        $(".chosen-enemy").on("click", function(event) {
             buttonID = $(this).attr("id");
-            defenderIsClicked = true;              
+            defenderIsClicked = true;
             $("#defender").show();
 
             if (defenderIsClicked) {
@@ -129,32 +129,33 @@ $("document").ready(function() {
                 $(this).appendTo("#defender");
                 defenderIsClickedAgain = true;
                 selectedDefender = $(this);
-            
             }
+
 
             if (defenderIsClickedAgain) {
                 $("#defender").children().removeClass("chosen-defender").appendTo("#enemies");
                 $(this).addClass("chosen-defender");
                 $(this).appendTo("#defender");
-                selectedDefender = $(this);
+                newSelectedDefender = $(this);
             }
+            
+    
 
             var selectedDefenderAttackPower = selectedDefender.data("Attack");
             var selectedDefenderHealth = selectedDefender.data("healthPoints");
             var currentDefenderHealth = parseInt(selectedDefenderHealth);
             var currentCharacterHealth = parseInt(selectedCharacterHealth);
-            var currentCharacterDefenderPower = selectedDefenderAttackPower;
             var selectedCharacterCounterAttackPower = 0;
 
             $("#attack").on("click", function() {
                 selectedCharacterHealthId = ("#" + selectedCharacter.attr("id") + "-health").toString();
                 selectedCharacterNameId = ("#" + selectedCharacter.attr("id") + "-name");
-
                 selectedDefenderHealthId = ("#" + selectedDefender.attr("id") + "-health").toString();
                 selectedDefenderNameId = ("#" + selectedDefender.attr("id") + "-name");
                 selectedCharacterCounterAttackPower = selectedCharacterCounterAttackPower + selectedCharacter.data("Attack");
 
                 if ((currentCharacterHealth >= 0) && (currentDefenderHealth  >= 0)) {
+                    
                     currentCharacterHealth = currentCharacterHealth - selectedDefenderAttackPower;
         
                     currentDefenderHealth = currentDefenderHealth - selectedCharacterCounterAttackPower;
@@ -170,7 +171,6 @@ $("document").ready(function() {
                     else if (currentDefenderHealth <= 0) {
                         defenderDefeated = true;
                         selectedDefender.detach();
-                        defendersLeft--;
                     }
                 }
                     
@@ -183,26 +183,24 @@ $("document").ready(function() {
                     $(selectedCharacterHealthId).text(currentCharacterHealth); 
                 }
 
+                $("#defender").on('DOMSubtreeModified', function () {
+                    enemiesLeft = (this).childElementCount;
+                });
 
-                if (defendersLeft === 0) {
-
-                    $("#result").text("Great Job" + $(selectedCharacterNameId).text() +"..... YOU'VE SAVED US !!!");
-                    $("#restart").show();
-
-                }
-
-                console.log(currentCharacterDefenderPower);
-                
                 $(selectedDefenderHealthId).text(currentDefenderHealth);
     
                 
                 
-                
+                if ((defendersLeft ==  0) && (enemiesLeft == 0) && (currentDefenderHealth <=0)) {
+
+                    $("#result").text("Great Job," + $(selectedCharacterNameId).text() +"..... YOU'VE SAVED US !!!");
+                    $("#restart").show();
     
+                }
+    
+                
             
             });
-            
-            
 
         });
 
