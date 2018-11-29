@@ -170,6 +170,8 @@ $("document").ready(function() {
             $("#attack").on("click", function(event) {
                 lightSaber.play();
 
+                $(this).text("ATTACK");
+
                 counter = 1;
                 counter ++;
                 
