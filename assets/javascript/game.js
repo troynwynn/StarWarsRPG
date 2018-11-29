@@ -1,3 +1,9 @@
+var themeSong = document.createElement("audio");
+themeSong.setAttribute("src", "assets/music/star-wars-theme.mp3");
+
+var lightSaber = document.createElement("audio");
+lightSaber.setAttribute("src", "assets/music/Lightsaber-Sound-effect.mp3");
+
 $("#enemies").hide();
 $("#fight-section").hide();
 $("#defender").hide();
@@ -7,8 +13,8 @@ $("#result").hide();
 var obiWan = {
     "name": "Obi-Wan Kenobi",
     "healthPoints": 130,
-    "Attack": 11,
-    "counterAttackPower": 15
+    "Attack": 8,
+    "counterAttackPower": 12
 }
 $("#character-1-health").text(obiWan.healthPoints);
 $("#character-1").data(obiWan);
@@ -16,8 +22,8 @@ $("#character-1").data(obiWan);
 var luke = {
     "name": "Luke Skywalker",
     "healthPoints": 100,
-    "Attack": 10,
-    "counterAttackPower": 20
+    "Attack": 7,
+    "counterAttackPower": 15
 }
 $("#character-2-health").text(luke.healthPoints);
 $("#character-2").data(luke);
@@ -27,8 +33,8 @@ $("#character-2").data(luke);
 var darthSidious = {
     "name": "Darth Sidious",
     "healthPoints": 150,
-    "Attack": 15,
-    "counterAttackPower": 20
+    "Attack": 12,
+    "counterAttackPower": 18
 }
 $("#character-3-health").text(darthSidious.healthPoints);
 $("#character-3").data(darthSidious);
@@ -36,8 +42,8 @@ $("#character-3").data(darthSidious);
 var darthMaul = {
     "name": "Darth Maul",
     "healthPoints": 180,
-    "Attack": 12,
-    "counterAttackPower": 25
+    "Attack": 9,
+    "counterAttackPower": 20
 }
 $("#character-4-health").text(darthMaul.healthPoints);
 $("#character-4").data(darthMaul);
@@ -62,7 +68,13 @@ $("#enemies").on('DOMSubtreeModified', function () {
 
 $("document").ready(function() {
     
+   
+    
+
     $(".choice").on("click", function() {
+       
+        themeSong.play();
+
         var buttonID= $(this).attr("id");
         $("#character-select").hide();
         $("#enemies").show();
@@ -156,6 +168,8 @@ $("document").ready(function() {
 
             function attackDefender() {
             $("#attack").on("click", function(event) {
+                lightSaber.play();
+
                 counter = 1;
                 counter ++;
                 
@@ -236,7 +250,7 @@ $("document").ready(function() {
                             selectedDefender = $(this);
                         }
 
-                        selectedDefenderAttackPower = selectedDefender.data("Attack");
+                        selectedDefenderAttackPower = selectedDefender.data("counterAttackPower");
                         currentDefenderHealth = selectedDefender.data("healthPoints");
 
                         $("#attack").on("click", function (){
