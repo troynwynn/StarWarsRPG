@@ -66,8 +66,6 @@ $("#enemies").on('DOMSubtreeModified', function () {
     defendersLeft = (this).childElementCount;
 });
 
-$("document").style.zoom = "100%;"
-
 $("document").ready(function() {
     
    
