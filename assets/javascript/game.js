@@ -66,14 +66,21 @@ $("#enemies").on('DOMSubtreeModified', function () {
     defendersLeft = (this).childElementCount;
 });
 
+
+
+
 $("document").ready(function() {
     
-   
+    $(".start-content").on("click", function() {
+        $("#start-button").hide();
+        themeSong.play();
+        this.style.visibility = "hidden";
+       });
     
 
     $(".choice").on("click", function() {
        
-        themeSong.play();
+       
 
         var buttonID= $(this).attr("id");
         $("#character-select").hide();
@@ -293,7 +300,7 @@ $("document").ready(function() {
 
     
     $("#restart").on("click", function() {
-        location.reload();
+        document.location.reload();
     });
     
     
