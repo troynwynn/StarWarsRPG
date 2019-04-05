@@ -1,6 +1,6 @@
 # Star Wars RPG (Role Playing Game)
 
-## Instructions
+## Game Design
 
 * When the game starts, the player will choose a character by clicking on the fighter's picture. The player will fight as that character for the rest of the game.
 
